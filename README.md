@@ -6,6 +6,8 @@ Veri Tabanı Yönetim Sistemleri Dersi
 - **235260134** – İrem Alliş
 - **235260182** – Merve Beril Yılmaz
 
+  ---
+
 ## 1. Proje Kullanıcıları Gereksinimleri ve Yetkileri
 
 Adli Süreç Takip ve Yönetim Sistemi’nde beş ana kullanıcı türü bulunur: **Dava Tarafları, Avukat, Savcı, Hakim ve Admin**. Her kullanıcı türü, veri tabanındaki verilere farklı düzeylerde erişim ve müdahale yetkisine sahiptir.
@@ -42,8 +44,6 @@ Adli Süreç Takip ve Yönetim Sistemi’nde beş ana kullanıcı türü bulunur
 
 Bu veri tabanı modeli, bir dava yönetim sistemindeki davalar, kişiler, duruşmalar, belgeler ve ilişkili diğer yapılar arasındaki ilişkileri organize etmektedir. Aşağıda her bir tablonun içerdiği alanlar ve bu alanların açıklamaları yer almaktadır.
 
----
-
 ### 2.1 DavaDosyalari
 Dava dosyalarına ait temel bilgileri içerir.
 - **dosyaID**: Dava dosyasının benzersiz kimliği (Primary Key).
@@ -77,8 +77,6 @@ Dava dosyalarındaki taraflara ilişkin bilgiler.
 
 **İlişkiler**: Bir dava dosyasının birden fazla tarafı olabilir, aynı zamanda bir dava tarafının da birden fazla dava dosyası olabilir (N:N). Kişi ile dava tarafı arasında bire bir ilişki vardır (1:1).
 
----
-
 ### 4. **Durusmalar**  
 Duruşmalarla ilgili ayrıntılar.
 - **durusmaID**: Duruşmanın benzersiz kimliği (Primary Key).
@@ -99,7 +97,6 @@ Duruşmalarla ilgili ayrıntılar.
 - Bir avukat birden çok duruşmaya bakabilirken aynı zamanda bir duruşmaya birden fazla avukat da bakabilir (N:N). 
 - Bir dava tarafının birden fazla duruşması olabilirken aynı zamanda bir duruşmanın da birden fazla dava tarafı olabilir (N:N).
 
----
 
 ### 5. **Belgeler**  
 Dava dosyalarına eklenen belgelerle ilgili bilgiler.
@@ -114,7 +111,6 @@ Dava dosyalarına eklenen belgelerle ilgili bilgiler.
 - Bir belge birden fazla dava dosyasında bulunabilirken aynı zamanda bir dava dosyasında da birden fazla belge bulunabilir (N:N). 
 - Bir belgeyi birden fazla kişi yükleyebilirken aynı zamanda bir kişi de birden fazla belge yükleyebilir (N:N).
 
----
 
 ### 6. **Kararlar**  
 Davaya ilişkin verilen kararlar.
@@ -129,7 +125,6 @@ Davaya ilişkin verilen kararlar.
 - Bir dosyanın bir kararı vardır fakat bir karar birden fazla dosyada bulunabilir (N:1). 
 - Bir kararın bir tane hakimi olabilirken bir hakim birden fazla kararda bulunabilir (N:1).
 
----
 
 ### 7. **Mahkemeler**  
 Mahkemelerle ilgili bilgiler.
@@ -139,7 +134,6 @@ Mahkemelerle ilgili bilgiler.
 - **mahkemeTelefon**: Mahkemenin telefon numarası.
 - **mahkemeMail**: Mahkemenin e-posta adresi.
 
----
 
 ### 8. **Loglar**  
 Sistemdeki işlemlerin kaydedildiği tablo.
@@ -154,7 +148,6 @@ Sistemdeki işlemlerin kaydedildiği tablo.
 - Kişi ile log arasında bire bir ilişki bulunur (1:1). 
 - Bir logda birden fazla dosya ile işlem yapılabilirken aynı zamanda bir dosyada birden fazla log da bulunabilir (N:N).
 
----
 
 ### 9. **Avukat**  
 Avukatlara ilişkin bilgiler.
@@ -168,7 +161,6 @@ Avukatlara ilişkin bilgiler.
 - Avukat ile kişi arasında bire bir ilişki vardır (1:1). 
 - Bir avukat birden fazla mahkemede (adliye) görev alabilirken aynı zamanda bir mahkemede de birden fazla avukat görev alabilir (N:N).
 
----
 
 ### 10. **Savci**  
 Savcılara ilişkin bilgiler.
@@ -196,7 +188,6 @@ Hakimlere ilişkin bilgiler.
 - Bir hakime birden fazla dosya atanabilir (1:N). 
 - Bir mahkemede (adliye) birden fazla hakim bulunabilir (1:N).
 
----
 
 ### 12. **Kanunlar**  
 Kanun ve madde bilgileri.
@@ -207,7 +198,6 @@ Kanun ve madde bilgileri.
 - **cezaTuru**: Cezanın türü.
 - **cezaSuresi**: Cezanın süresi.
 
----
 
 ### 13. **Suclar**  
 Dava dosyalarına ait suç bilgileri.
@@ -224,7 +214,6 @@ Dava dosyalarına ait suç bilgileri.
 - Bir suç bir kanun ile bağlantılıdır (1:1). 
 - Bir suçun birden fazla tarafı bulunabilirken aynı zamanda bir tarafın da birden fazla suçu olabilir (N:N).
 
----
 
 ### 14. **Cezalar**  
 Suçlara verilen cezalarla ilgili bilgiler.
@@ -240,7 +229,6 @@ Suçlara verilen cezalarla ilgili bilgiler.
 **İlişkiler**: 
 - Bir suç birden fazla cezada bulunabilirken aynı zamanda bir cezada da birden fazla suç olabilir (N:N).
 
----
 
 ### 15. **Randevular**  
 Avukat ve taraflar arasındaki randevular.
@@ -269,4 +257,4 @@ Randevu ücret ödemeleriyle ilgili bilgiler.
 **İlişkiler**: 
 - Bir tarafın birden fazla ödemesi olabilir (1:N). 
 - Bir kişinin birden fazla randevusu olabilir (1:N).
-```
+
