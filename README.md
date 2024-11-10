@@ -55,8 +55,8 @@ Dava dosyalarına ait temel bilgileri içerir.
 | davaTürü            | Davanın türü                                            | STRING         |                   |
 | davaDurumu          | Davanın durumu (açık, kapalı, beklemede)                | STRING         |                   |
 
-  
 **İlişkiler**: Bir mahkemede (adliye) birden fazla dava dosyası bulunabilir (1:N).
+
 
 ### 2.2 Kisiler
 Sistemdeki kişilerin bilgilerini içerir.
@@ -83,8 +83,8 @@ Dava dosyalarındaki taraflara ilişkin bilgiler.
 | tarafRol   | Tarafın davadaki rolü (davalı, davacı, tanık)              | STRING    |                                             |
 | ekBilgi    | Taraf hakkında ek bilgiler                                 | STRING    |                                             |
 
-
 **İlişkiler**: Bir dava dosyasının birden fazla tarafı olabilir, aynı zamanda bir dava tarafının da birden fazla dava dosyası olabilir (N:N). Kişi ile dava tarafı arasında bire bir ilişki vardır (1:1).
+
 
 ### 4. **Durusmalar**  
 Duruşmalarla ilgili ayrıntılar.
@@ -100,7 +100,6 @@ Duruşmalarla ilgili ayrıntılar.
 | avukatID         | Duruşmada yer alan avukatın ID'si                           | INTEGER   | Foreign Key, `Avukat` tablosuna referans      |
 | durusmaSonuc     | Duruşmanın sonucu (ertelendi, tamamlandı)                   | STRING    |                                               |
 | tarafID          | Duruşmada yer alan tarafın ID'si                            | INTEGER   | Foreign Key, `DavaTaraflari` tablosuna referans |
-
 
 **İlişkiler**: 
 - Bir dosya birden fazla duruşmada kullanılabilir (1:N). 
@@ -128,15 +127,14 @@ Dava dosyalarına eklenen belgelerle ilgili bilgiler.
 
 ### 6. **Kararlar**  
 Davaya ilişkin verilen kararlar.
-| Alan Adı        | Açıklama                                                   | Veri Tipi | Özellikler                                 |
-|-----------------|------------------------------------------------------------|-----------|--------------------------------------------|
-| kararID         | Kararın benzersiz kimliği                                  | INTEGER   | Primary Key                                |
-| dosyaID         | Kararın ait olduğu dava dosyasının ID'si                   | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
-| kararTarihi     | Kararın tarihi                                             | DATE      |                                            |
-| kararDurumu     | Kararın durumu (kesin, temyiz)                             | STRING    |                                            |
-| kararDetayi     | Karar detayları                                            | STRING    |                                            |
-
-- **hakimID**: Kararı veren hakimin ID'si (Foreign Key, `Hakim` tablosuna referans).
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| kararID       | Kararın benzersiz kimliği                            | INTEGER   | Primary Key                                 |
+| dosyaID       | Kararın ait olduğu dava dosyasının ID'si             | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| kararTarihi   | Kararın tarihi                                       | DATE      |                                             |
+| kararDurumu   | Kararın durumu (kesin, temyiz)                       | STRING    |                                             |
+| kararDetayi   | Karar detayları                                     | TEXT      |                                             |
+| hakimID       | Kararı veren hakimin ID'si                           | INTEGER   | Foreign Key, `Hakim` tablosuna referans    |
 
 **İlişkiler**: 
 - Bir dosyanın bir kararı vardır fakat bir karar birden fazla dosyada bulunabilir (N:1). 
@@ -154,7 +152,6 @@ Mahkemelerle ilgili bilgiler.
 | mahkemeMail      | Mahkemenin e-posta adresi      | STRING    |               |
 
 
-
 ### 8. **Loglar**  
 Sistemdeki işlemlerin kaydedildiği tablo.
 | Alan Adı        | Açıklama                                           | Veri Tipi | Özellikler                                  |
@@ -165,7 +162,6 @@ Sistemdeki işlemlerin kaydedildiği tablo.
 | logTarihi       | Log kaydının tarihi                                | DATE      |                                             |
 | islemTipi       | İşlem tipi (oluşturma, güncelleme, silme)          | STRING    |                                             |
 | islemDetayi     | İşlemin detayı                                     | STRING    |                                             |
-
 
 **İlişkiler**: 
 - Kişi ile log arasında bire bir ilişki bulunur (1:1). 
@@ -197,11 +193,11 @@ Savcılara ilişkin bilgiler.
 | dosyaID       | Savcıya atanan belge ID'si                           | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
 | mahkemeID     | Savcının görev yaptığı mahkeme ID'si                 | INTEGER   | Foreign Key, `Mahkemeler` tablosuna referans |
 
-
 **İlişkiler**: 
 - Savcı ile kişi arasında bire bir ilişki vardır (1:1). 
 - Bir savcıya birden fazla dosya atanabilir aynı zamanda bir dosyaya birden fazla savcı bakabilir (N:N). 
 - Bir mahkemede (adliye) birden fazla savcı bulunabilir (1:N).
+
 
 ### 11. **Hakim**  
 Hakimlere ilişkin bilgiler.
@@ -212,7 +208,6 @@ Hakimlere ilişkin bilgiler.
 | hakimTuru     | Hakimin türü (başsavcı, cumhuriyet)                  | STRING    |                                             |
 | dosyaID       | Hakimin baktığı dava dosyası ID'si                   | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
 | mahkemeID     | Hakimin görev yaptığı mahkeme ID'si                  | INTEGER   | Foreign Key, `Mahkemeler` tablosuna referans |
-
 
 **İlişkiler**: 
 - Hakim ile kişi arasında bire bir ilişki vardır (1:1). 
@@ -230,7 +225,6 @@ Kanun ve madde bilgileri.
 | maddeMetni    | Maddenin tam metni                                   | TEXT      |                                             |
 | cezaTuru      | Cezanın türü                                         | STRING    |                                             |
 | cezaSuresi    | Cezanın süresi                                       | STRING    |                                             |
-
 
 
 ### 13. **Suclar**  
@@ -264,7 +258,6 @@ Suçlara verilen cezalarla ilgili bilgiler.
 | bitTarih      | Cezanın bitiş tarihi                                 | DATE      |                                             |
 | cezaAciklama  | Cezaya ilişkin açıklama                              | STRING    |                                             |
 
-
 **İlişkiler**: 
 - Bir suç birden fazla cezada bulunabilirken aynı zamanda bir cezada da birden fazla suç olabilir (N:N).
 
@@ -278,13 +271,13 @@ Avukat ve taraflar arasındaki randevular.
 | tarafID       | Randevunun düzenlendiği taraf ID'si                  | INTEGER   | Foreign Key, `DavaTaraflari` tablosuna referans |
 | randevuTarih  | Randevu tarihi                                       | DATE      |                                             |
 | randevuSaat   | Randevu saati                                        | TIME      |                                             |
-| randevuDurumu | Randevu durumu (tamamlandı, iptal edildi)            | STRING    |                                             |
-al).
-- **randevuAciklama**: Randevuya ilişkin açıklama.
+| randevuDurumu | Randevu durumu                                       | STRING    |                                             |
+| randevuAciklama| Randevuya ilişkin açıklama                           | STRING    |                                             |
 
 **İlişkiler**: 
 - Bir avukatın birden fazla randevusu olabilir (1:N). 
 - Bir tarafın birden fazla avukatı olabilirken aynı zamanda bir avukat da birden fazla tarafın avukatı olabilir (N:N).
+
 
 ### 16. **Odemeler**  
 Randevu ücret ödemeleriyle ilgili bilgiler.
@@ -297,7 +290,6 @@ Randevu ücret ödemeleriyle ilgili bilgiler.
 | odemeTarih    | Ödeme tarihi                                         | DATE      |                                             |
 | odemeTuru     | Ödeme türü (nakit, kart)                             | STRING    |                                             |
 | odemeDurum    | Ödeme durumu (ödendi, ödenmedi)                     | STRING    |                                             |
-
 
 **İlişkiler**: 
 - Bir tarafın birden fazla ödemesi olabilir (1:N). 
