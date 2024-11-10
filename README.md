@@ -46,12 +46,15 @@ Bu veri tabanı modeli, bir dava yönetim sistemindeki davalar, kişiler, duruş
 
 ### 2.1 DavaDosyalari
 Dava dosyalarına ait temel bilgileri içerir.
-- **dosyaID**: Dava dosyasının benzersiz kimliği (Primary Key).
-- **davaNo**: Dava numarası.
-- **mahkemeID**: Davanın görüldüğü mahkemenin ID'si (Foreign Key, `Mahkemeler` tablosuna referans).
-- **davaAcilmaTarihi**: Davanın açılış tarihi.
-- **davaTürü**: Davanın türü.
-- **davaDurumu**: Davanın durumu (açık, kapalı, beklemede).
+| Alan Adı            | Açıklama                                                | Veri Tipi      | Özellikler        |
+|---------------------|---------------------------------------------------------|----------------|-------------------|
+| dosyaID             | Dava dosyasının benzersiz kimliği                        | INTEGER        | Primary Key       |
+| davaNo              | Dava numarası                                           | STRING         |                   |
+| mahkemeID           | Davanın görüldüğü mahkemenin ID'si                       | INTEGER        | Foreign Key, Mahkemeler tablosuna referans |
+| davaAcilmaTarihi    | Davanın açılış tarihi                                   | DATE           |                   |
+| davaTürü            | Davanın türü                                            | STRING         |                   |
+| davaDurumu          | Davanın durumu (açık, kapalı, beklemede)                | STRING         |                   |
+
   
 **İlişkiler**: Bir mahkemede (adliye) birden fazla dava dosyası bulunabilir (1:N).
 
