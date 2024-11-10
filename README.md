@@ -60,38 +60,47 @@ Dava dosyalarına ait temel bilgileri içerir.
 
 ### 2.2 Kisiler
 Sistemdeki kişilerin bilgilerini içerir.
-- **kisiID**: Kişinin benzersiz kimliği (Primary Key).
-- **kisiTC**: Kişinin TC kimlik numarası.
-- **kisiAdSoyad**: Kişinin adı ve soyadı.
-- **kisiDogumTarihi**: Kişinin doğum tarihi.
-- **kisiTelefon**: Kişinin telefon numarası.
-- **kisiMail**: Kişinin e-posta adresi.
-- **kisiAdres**: Kişinin adres bilgisi.
-- **kisiSifresi**: Kişinin sisteme giriş yapabilmesi için şifresi.
-- **kisiRolu**: Kişinin rolü (avukat, hakim, savcı, davatarafları, admin).
+| Alan Adı          | Açıklama                                                 | Veri Tipi      | Özellikler          |
+|-------------------|----------------------------------------------------------|----------------|---------------------|
+| kisiID            | Kişinin benzersiz kimliği                                 | INTEGER        | Primary Key         |
+| kisiTC            | Kişinin TC kimlik numarası                                | STRING         |                     |
+| kisiAdSoyad       | Kişinin adı ve soyadı                                     | STRING         |                     |
+| kisiDogumTarihi   | Kişinin doğum tarihi                                      | DATE           |                     |
+| kisiTelefon       | Kişinin telefon numarası                                  | STRING         |                     |
+| kisiMail          | Kişinin e-posta adresi                                    | STRING         |                     |
+| kisiAdres         | Kişinin adres bilgisi                                     | STRING         |                     |
+| kisiSifresi       | Kişinin sisteme giriş yapabilmesi için şifresi            | STRING         |                     |
+| kisiRolu          | Kişinin rolü (avukat, hakim, savcı, davatarafları, admin) | STRING         |                     |
+
 
 ### 3. **DavaTaraflari**  
 Dava dosyalarındaki taraflara ilişkin bilgiler.
-- **tarafID**: Tarafın benzersiz kimliği (Primary Key).
-- **dosyaID**: Tarafın dahil olduğu dava dosyasının ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **kisiID**: Taraf olarak atanmış kişinin ID'si (Foreign Key, `Kisiler` tablosuna referans).
-- **tarafRol**: Tarafın davadaki rolü (davalı, davacı, tanık).
-- **ekBilgi**: Taraf hakkında ek bilgiler.
+| Alan Adı   | Açıklama                                                   | Veri Tipi | Özellikler                                  |
+|------------|------------------------------------------------------------|-----------|---------------------------------------------|
+| tarafID    | Tarafın benzersiz kimliği                                  | INTEGER   | Primary Key                                 |
+| dosyaID    | Tarafın dahil olduğu dava dosyasının ID'si                 | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| kisiID     | Taraf olarak atanmış kişinin ID'si                         | INTEGER   | Foreign Key, `Kisiler` tablosuna referans   |
+| tarafRol   | Tarafın davadaki rolü (davalı, davacı, tanık)              | STRING    |                                             |
+| ekBilgi    | Taraf hakkında ek bilgiler                                 | STRING    |                                             |
+
 
 **İlişkiler**: Bir dava dosyasının birden fazla tarafı olabilir, aynı zamanda bir dava tarafının da birden fazla dava dosyası olabilir (N:N). Kişi ile dava tarafı arasında bire bir ilişki vardır (1:1).
 
 ### 4. **Durusmalar**  
 Duruşmalarla ilgili ayrıntılar.
-- **durusmaID**: Duruşmanın benzersiz kimliği (Primary Key).
-- **dosyaID**: Duruşmanın ait olduğu dava dosyasının ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **durusmaTarihi**: Duruşma tarihi.
-- **durusmaSaati**: Duruşmanın saati.
-- **durusmaYeri**: Duruşmanın yapıldığı yer.
-- **mahkemeID**: Duruşmanın görüldüğü mahkemenin ID'si (Foreign Key, `Mahkemeler` tablosuna referans).
-- **hakimID**: Duruşmayı yöneten hakimin ID'si (Foreign Key, `Hakim` tablosuna referans).
-- **avukatID**: Duruşmada yer alan avukatın ID'si (Foreign Key, `Avukat` tablosuna referans).
-- **durusmaSonuc**: Duruşmanın sonucu (ertelendi, tamamlandı).
-- **tarafID**: Duruşmada yer alan tarafın ID'si (Foreign Key, `DavaTaraflari` tablosuna referans).
+| Alan Adı         | Açıklama                                                    | Veri Tipi | Özellikler                                    |
+|------------------|-------------------------------------------------------------|-----------|-----------------------------------------------|
+| durusmaID        | Duruşmanın benzersiz kimliği                                 | INTEGER   | Primary Key                                   |
+| dosyaID          | Duruşmanın ait olduğu dava dosyasının ID'si                 | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| durusmaTarihi    | Duruşma tarihi                                              | DATE      |                                               |
+| durusmaSaati     | Duruşmanın saati                                            | TIME      |                                               |
+| durusmaYeri      | Duruşmanın yapıldığı yer                                    | STRING    |                                               |
+| mahkemeID        | Duruşmanın görüldüğü mahkemenin ID'si                       | INTEGER   | Foreign Key, `Mahkemeler` tablosuna referans   |
+| hakimID          | Duruşmayı yöneten hakimin ID'si                             | INTEGER   | Foreign Key, `Hakim` tablosuna referans       |
+| avukatID         | Duruşmada yer alan avukatın ID'si                           | INTEGER   | Foreign Key, `Avukat` tablosuna referans      |
+| durusmaSonuc     | Duruşmanın sonucu (ertelendi, tamamlandı)                   | STRING    |                                               |
+| tarafID          | Duruşmada yer alan tarafın ID'si                            | INTEGER   | Foreign Key, `DavaTaraflari` tablosuna referans |
+
 
 **İlişkiler**: 
 - Bir dosya birden fazla duruşmada kullanılabilir (1:N). 
@@ -103,12 +112,14 @@ Duruşmalarla ilgili ayrıntılar.
 
 ### 5. **Belgeler**  
 Dava dosyalarına eklenen belgelerle ilgili bilgiler.
-- **belgeID**: Belgenin benzersiz kimliği (Primary Key).
-- **dosyaID**: Belgenin ait olduğu dava dosyasının ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **belgeTürü**: Belgenin türü (delil, ifade, karar, rapor).
-- **belgeAciklama**: Belge hakkında açıklama.
-- **yüklenmeTarihi**: Belgenin sisteme yüklendiği tarih.
-- **kisiID**: Belgeyi yükleyen kişinin ID'si (Foreign Key, `Kisiler` tablosuna referans).
+| Alan Adı         | Açıklama                                                   | Veri Tipi | Özellikler                                 |
+|------------------|------------------------------------------------------------|-----------|--------------------------------------------|
+| belgeID          | Belgenin benzersiz kimliği                                 | INTEGER   | Primary Key                                |
+| dosyaID          | Belgenin ait olduğu dava dosyasının ID'si                  | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| belgeTürü        | Belgenin türü (delil, ifade, karar, rapor)                 | STRING    |                                            |
+| belgeAciklama    | Belge hakkında açıklama                                    | STRING    |                                            |
+| yüklenmeTarihi   | Belgenin sisteme yüklendiği tarih                          | DATE      |                                            |
+| kisiID           | Belgeyi yükleyen kişinin ID'si                             | INTEGER   | Foreign Key, `Kisiler` tablosuna referans  |
 
 **İlişkiler**: 
 - Bir belge birden fazla dava dosyasında bulunabilirken aynı zamanda bir dava dosyasında da birden fazla belge bulunabilir (N:N). 
@@ -117,11 +128,14 @@ Dava dosyalarına eklenen belgelerle ilgili bilgiler.
 
 ### 6. **Kararlar**  
 Davaya ilişkin verilen kararlar.
-- **kararID**: Kararın benzersiz kimliği (Primary Key).
-- **dosyaID**: Kararın ait olduğu dava dosyasının ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **kararTarihi**: Kararın tarihi.
-- **kararDurumu**: Kararın durumu (kesin, temyiz).
-- **kararDetayi**: Karar detayları.
+| Alan Adı        | Açıklama                                                   | Veri Tipi | Özellikler                                 |
+|-----------------|------------------------------------------------------------|-----------|--------------------------------------------|
+| kararID         | Kararın benzersiz kimliği                                  | INTEGER   | Primary Key                                |
+| dosyaID         | Kararın ait olduğu dava dosyasının ID'si                   | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| kararTarihi     | Kararın tarihi                                             | DATE      |                                            |
+| kararDurumu     | Kararın durumu (kesin, temyiz)                             | STRING    |                                            |
+| kararDetayi     | Karar detayları                                            | STRING    |                                            |
+
 - **hakimID**: Kararı veren hakimin ID'si (Foreign Key, `Hakim` tablosuna referans).
 
 **İlişkiler**: 
@@ -131,21 +145,27 @@ Davaya ilişkin verilen kararlar.
 
 ### 7. **Mahkemeler**  
 Mahkemelerle ilgili bilgiler.
-- **mahkemeID**: Mahkemenin benzersiz kimliği (Primary Key).
-- **mahkemeAd**: Mahkemenin adı.
-- **mahkemeAdres**: Mahkemenin adresi.
-- **mahkemeTelefon**: Mahkemenin telefon numarası.
-- **mahkemeMail**: Mahkemenin e-posta adresi.
+| Alan Adı         | Açıklama                      | Veri Tipi | Özellikler    |
+|------------------|--------------------------------|-----------|---------------|
+| mahkemeID        | Mahkemenin benzersiz kimliği   | INTEGER   | Primary Key   |
+| mahkemeAd        | Mahkemenin adı                 | STRING    |               |
+| mahkemeAdres     | Mahkemenin adresi              | STRING    |               |
+| mahkemeTelefon   | Mahkemenin telefon numarası    | STRING    |               |
+| mahkemeMail      | Mahkemenin e-posta adresi      | STRING    |               |
+
 
 
 ### 8. **Loglar**  
 Sistemdeki işlemlerin kaydedildiği tablo.
-- **logID**: Log kaydının benzersiz kimliği (Primary Key).
-- **kisiID**: İşlemi yapan kişinin ID'si (Foreign Key, `Kisiler` tablosuna referans).
-- **dosyaID**: İşlemin ilgili olduğu dava dosyasının ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **logTarihi**: Log kaydının tarihi.
-- **islemTipi**: İşlem tipi (oluşturma, güncelleme, silme).
-- **islemDetayi**: İşlemin detayı.
+| Alan Adı        | Açıklama                                           | Veri Tipi | Özellikler                                  |
+|-----------------|----------------------------------------------------|-----------|---------------------------------------------|
+| logID           | Log kaydının benzersiz kimliği                     | INTEGER   | Primary Key                                 |
+| kisiID          | İşlemi yapan kişinin ID'si                         | INTEGER   | Foreign Key, `Kisiler` tablosuna referans   |
+| dosyaID         | İşlemin ilgili olduğu dava dosyasının ID'si        | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| logTarihi       | Log kaydının tarihi                                | DATE      |                                             |
+| islemTipi       | İşlem tipi (oluşturma, güncelleme, silme)          | STRING    |                                             |
+| islemDetayi     | İşlemin detayı                                     | STRING    |                                             |
+
 
 **İlişkiler**: 
 - Kişi ile log arasında bire bir ilişki bulunur (1:1). 
@@ -154,11 +174,13 @@ Sistemdeki işlemlerin kaydedildiği tablo.
 
 ### 9. **Avukat**  
 Avukatlara ilişkin bilgiler.
-- **avukatID**: Avukatın benzersiz kimliği (Primary Key).
-- **kisiID**: Avukat olarak kayıtlı kişinin ID'si (Foreign Key, `Kisiler` tablosuna referans).
-- **mahkemeID**: Avukatın görev yaptığı mahkeme ID'si (Foreign Key, `Mahkemeler` tablosuna referans).
-- **avBuro**: Avukatın bağlı olduğu büro.
-- **davaSayisi**: Avukatın temsil ettiği dava sayısı.
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| avukatID      | Avukatın benzersiz kimliği                           | INTEGER   | Primary Key                                 |
+| kisiID        | Avukat olarak kayıtlı kişinin ID'si                  | INTEGER   | Foreign Key, `Kisiler` tablosuna referans   |
+| mahkemeID     | Avukatın görev yaptığı mahkeme ID'si                 | INTEGER   | Foreign Key, `Mahkemeler` tablosuna referans |
+| avBuro        | Avukatın bağlı olduğu büro                           | STRING    |                                             |
+| davaSayisi    | Avukatın temsil ettiği dava sayısı                   | INTEGER   |                                             |
 
 **İlişkiler**: 
 - Avukat ile kişi arasında bire bir ilişki vardır (1:1). 
@@ -167,11 +189,14 @@ Avukatlara ilişkin bilgiler.
 
 ### 10. **Savci**  
 Savcılara ilişkin bilgiler.
-- **savciID**: Savcının benzersiz kimliği (Primary Key).
-- **kisiID**: Savcı olarak kayıtlı kişinin ID'si (Foreign Key, `Kisiler` tablosuna referans).
-- **savciTuru**: Savcının türü (başsavcı, cumhuriyet).
-- **dosyaID**: Savcıya atanan belge ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **mahkemeID**: Savcının görev yaptığı mahkeme ID'si (Foreign Key, `Mahkemeler` tablosuna referans).
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| savciID       | Savcının benzersiz kimliği                           | INTEGER   | Primary Key                                 |
+| kisiID        | Savcı olarak kayıtlı kişinin ID'si                   | INTEGER   | Foreign Key, `Kisiler` tablosuna referans   |
+| savciTuru     | Savcının türü (başsavcı, cumhuriyet)                 | STRING    |                                             |
+| dosyaID       | Savcıya atanan belge ID'si                           | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| mahkemeID     | Savcının görev yaptığı mahkeme ID'si                 | INTEGER   | Foreign Key, `Mahkemeler` tablosuna referans |
+
 
 **İlişkiler**: 
 - Savcı ile kişi arasında bire bir ilişki vardır (1:1). 
@@ -180,11 +205,14 @@ Savcılara ilişkin bilgiler.
 
 ### 11. **Hakim**  
 Hakimlere ilişkin bilgiler.
-- **hakimID**: Hakimin benzersiz kimliği (Primary Key).
-- **kisiID**: Hakim olarak kayıtlı kişinin ID'si (Foreign Key, `Kisiler` tablosuna referans).
-- **hakimTuru**: Hakimin türü (başsavcı, cumhuriyet).
-- **dosyaID**: Hakimin baktığı dava dosyası ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **mahkemeID**: Hakimin görev yaptığı mahkeme ID'si (Foreign Key, `Mahkemeler` tablosuna referans).
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| hakimID       | Hakimin benzersiz kimliği                            | INTEGER   | Primary Key                                 |
+| kisiID        | Hakim olarak kayıtlı kişinin ID'si                   | INTEGER   | Foreign Key, `Kisiler` tablosuna referans   |
+| hakimTuru     | Hakimin türü (başsavcı, cumhuriyet)                  | STRING    |                                             |
+| dosyaID       | Hakimin baktığı dava dosyası ID'si                   | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| mahkemeID     | Hakimin görev yaptığı mahkeme ID'si                  | INTEGER   | Foreign Key, `Mahkemeler` tablosuna referans |
+
 
 **İlişkiler**: 
 - Hakim ile kişi arasında bire bir ilişki vardır (1:1). 
@@ -194,23 +222,28 @@ Hakimlere ilişkin bilgiler.
 
 ### 12. **Kanunlar**  
 Kanun ve madde bilgileri.
-- **kanunID**: Kanunun benzersiz kimliği (Primary Key).
-- **kanunKodu**: Kanun kodu.
-- **kanunMaddeNo**: Kanun maddesi numarası.
-- **maddeMetni**: Maddenin tam metni.
-- **cezaTuru**: Cezanın türü.
-- **cezaSuresi**: Cezanın süresi.
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| kanunID       | Kanunun benzersiz kimliği                            | INTEGER   | Primary Key                                 |
+| kanunKodu     | Kanun kodu                                           | STRING    |                                             |
+| kanunMaddeNo  | Kanun maddesi numarası                               | INTEGER   |                                             |
+| maddeMetni    | Maddenin tam metni                                   | TEXT      |                                             |
+| cezaTuru      | Cezanın türü                                         | STRING    |                                             |
+| cezaSuresi    | Cezanın süresi                                       | STRING    |                                             |
+
 
 
 ### 13. **Suclar**  
 Dava dosyalarına ait suç bilgileri.
-- **sucID**: Suçun benzersiz kimliği (Primary Key).
-- **dosyaID**: Suçun dahil olduğu dava dosyasının ID'si (Foreign Key, `DavaDosyalari` tablosuna referans).
-- **kanunID**: Suçun ilgili olduğu kanun ID'si (Foreign Key, `Kanunlar` tablosuna referans).
-- **sucTipi**: Suç tipi.
-- **sucYeri**: Suçun işlendiği yer.
-- **tarafID**: Suç ile ilişkili taraf ID'si (Foreign Key, `DavaTaraflari` tablosuna referans).
-- **sucDurumu**: Suç durumu (inceleme, tamamlandı).
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| sucID         | Suçun benzersiz kimliği                              | INTEGER   | Primary Key                                 |
+| dosyaID       | Suçun dahil olduğu dava dosyasının ID'si             | INTEGER   | Foreign Key, `DavaDosyalari` tablosuna referans |
+| kanunID       | Suçun ilgili olduğu kanun ID'si                      | INTEGER   | Foreign Key, `Kanunlar` tablosuna referans  |
+| sucTipi       | Suç tipi                                             | STRING    |                                             |
+| sucYeri       | Suçun işlendiği yer                                  | STRING    |                                             |
+| tarafID       | Suç ile ilişkili taraf ID'si                         | INTEGER   | Foreign Key, `DavaTaraflari` tablosuna referans |
+| sucDurumu     | Suç durumu (inceleme, tamamlandı)                    | STRING    |                                             |
 
 **İlişkiler**: 
 - Bir suç birden fazla dosyada bulunabilirken aynı zamanda bir dosyada da birden fazla suç olabilir (N:N). 
@@ -220,14 +253,17 @@ Dava dosyalarına ait suç bilgileri.
 
 ### 14. **Cezalar**  
 Suçlara verilen cezalarla ilgili bilgiler.
-- **cezaID**: Cezanın benzersiz kimliği (Primary Key).
-- **sucID**: Cezanın bağlı olduğu suç ID'si (Foreign Key, `Suclar` tablosuna referans).
-- **cezaTuru**: Cezanın türü (para, hapis).
-- **cezaSuresi**: Cezanın süresi.
-- **cezaTutar**: Cezanın miktarı.
-- **basTarih**: Cezanın başlangıç tarihi.
-- **bitTarih**: Cezanın bitiş tarihi.
-- **cezaAciklama**: Cezaya ilişkin açıklama.
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| cezaID        | Cezanın benzersiz kimliği                            | INTEGER   | Primary Key                                 |
+| sucID         | Cezanın bağlı olduğu suç ID'si                       | INTEGER   | Foreign Key, `Suclar` tablosuna referans    |
+| cezaTuru      | Cezanın türü (para, hapis)                           | STRING    |                                             |
+| cezaSuresi    | Cezanın süresi                                       | STRING    |                                             |
+| cezaTutar     | Cezanın miktarı                                      | DECIMAL   |                                             |
+| basTarih      | Cezanın başlangıç tarihi                             | DATE      |                                             |
+| bitTarih      | Cezanın bitiş tarihi                                 | DATE      |                                             |
+| cezaAciklama  | Cezaya ilişkin açıklama                              | STRING    |                                             |
+
 
 **İlişkiler**: 
 - Bir suç birden fazla cezada bulunabilirken aynı zamanda bir cezada da birden fazla suç olabilir (N:N).
@@ -235,12 +271,15 @@ Suçlara verilen cezalarla ilgili bilgiler.
 
 ### 15. **Randevular**  
 Avukat ve taraflar arasındaki randevular.
-- **randevuID**: Randevunun benzersiz kimliği (Primary Key).
-- **avukatID**: Randevunun düzenlendiği avukat ID'si (Foreign Key, `Avukat` tablosuna referans).
-- **tarafID**: Randevunun düzenlendiği taraf ID'si (Foreign Key, `DavaTaraflari` tablosuna referans).
-- **randevuTarih**: Randevu tarihi.
-- **randevuSaat**: Randevu saati.
-- **randevuDurumu**: Randevu durumu (tamamlandı, iptal).
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| randevuID     | Randevunun benzersiz kimliği                         | INTEGER   | Primary Key                                 |
+| avukatID      | Randevunun düzenlendiği avukat ID'si                 | INTEGER   | Foreign Key, `Avukat` tablosuna referans    |
+| tarafID       | Randevunun düzenlendiği taraf ID'si                  | INTEGER   | Foreign Key, `DavaTaraflari` tablosuna referans |
+| randevuTarih  | Randevu tarihi                                       | DATE      |                                             |
+| randevuSaat   | Randevu saati                                        | TIME      |                                             |
+| randevuDurumu | Randevu durumu (tamamlandı, iptal edildi)            | STRING    |                                             |
+al).
 - **randevuAciklama**: Randevuya ilişkin açıklama.
 
 **İlişkiler**: 
@@ -249,13 +288,16 @@ Avukat ve taraflar arasındaki randevular.
 
 ### 16. **Odemeler**  
 Randevu ücret ödemeleriyle ilgili bilgiler.
-- **odemeID**: Ödemenin benzersiz kimliği.
-- **tarafID**: Ödemenin ilgili olduğu taraf ID'si (Foreign Key, `DavaTaraflari` tablosuna referans).
-- **randevuID**: Ödemenin ilişkili olduğu randevu ID'si (Foreign Key, `Randevular` tablosuna referans).
-- **odemeTutar**: Ödeme tutarı.
-- **odemeTarih**: Ödeme tarihi.
-- **odemeTuru**: Ödeme türü (nakit, kart).
-- **odemeDurum**: Ödeme durumu (ödendi, ödenmedi).
+| Alan Adı      | Açıklama                                             | Veri Tipi | Özellikler                                  |
+|---------------|------------------------------------------------------|-----------|---------------------------------------------|
+| odemeID       | Ödemenin benzersiz kimliği                           | INTEGER   | Primary Key                                 |
+| tarafID       | Ödemenin ilgili olduğu taraf ID'si                   | INTEGER   | Foreign Key, `DavaTaraflari` tablosuna referans |
+| randevuID     | Ödemenin ilişkili olduğu randevu ID'si               | INTEGER   | Foreign Key, `Randevular` tablosuna referans |
+| odemeTutar    | Ödeme tutarı                                        | DECIMAL   |                                             |
+| odemeTarih    | Ödeme tarihi                                         | DATE      |                                             |
+| odemeTuru     | Ödeme türü (nakit, kart)                             | STRING    |                                             |
+| odemeDurum    | Ödeme durumu (ödendi, ödenmedi)                     | STRING    |                                             |
+
 
 **İlişkiler**: 
 - Bir tarafın birden fazla ödemesi olabilir (1:N). 
